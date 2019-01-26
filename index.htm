@@ -49,15 +49,11 @@
                 gradient.addColorStop(0, 'rgba(255,255,255,1)');
                 gradient.addColorStop(0.2, 'rgba(0,255,255,1)');
                 gradient.addColorStop(0.4, 'rgba(0,0,64,1)');
-                gradient.addColorStop(1, 'rgba(0,0,0,0)');
+                gradient.addColorStop(1, 'rgba(0,0,0,1)');
             }
             if (color === 'white') {
-                gradient.addColorStop(0, 'rgba(255,255,255,1)');
+                gradient.addColorStop(0.8, 'rgba(255,255,255,1)');
                 gradient.addColorStop(1, 'rgba(255,255,255,0)');
-            }
-            if (color === 'black') {
-                gradient.addColorStop(0, 'rgba(0,0,0,1)');
-                gradient.addColorStop(1, 'rgba(0,0,0,0)');
             }
             context.fillStyle = gradient;
             context.fillRect(0, 0, canvas.width, canvas.height);
@@ -67,34 +63,44 @@
             return texture;
         }
         function createSpherePoints() {
-            const bodyGeometry = new THREE.SphereGeometry(150, 190, 120) //你就一個迴圈，用這個方法生成半徑1~5的同心球  他這個我不知道能不能拼接成一個物件 我用同心球的方法重想一個迴圈好了
+            const bodyGeometry = new THREE.SphereGeometry(150, 190, 120)
             const eyesGeometry = new THREE.Geometry()
             const mouthGeometry = new THREE.Geometry()
             const handGeometry = new THREE.Geometry()
             const footGeometry = new THREE.Geometry()
             const material = new THREE.PointsMaterial({
+                color: 0xffffff,
                 size: 3,
                 transparent: true,
+                blending: THREE.AdditiveBlending,
                 map: generateSprite('blue')
             });
             const eyesMaterial = new THREE.PointsMaterial({
                 color: 0xffffff,
                 size: 3,
+                transparent: true,
+                blending: THREE.AdditiveBlending,
                 map: generateSprite('white')
             });
             const mouthMaterial = new THREE.PointsMaterial({
                 color: 0xffffff,
                 size: 3,
+                transparent: true,
+                blending: THREE.AdditiveBlending,
                 map: generateSprite('white')
             });
             const handMaterial = new THREE.PointsMaterial({
                 color: 0xffffff,
                 size: 3,
-                map: generateSprite('white')
+                transparent: true,
+                blending: THREE.AdditiveBlending,
+                map: generateSprite('blue')
             });
             const footMaterial = new THREE.PointsMaterial({
                 color: 0xffffff,
                 size: 3,
+                transparent: true,
+                blending: THREE.AdditiveBlending,
                 map: generateSprite('white')
             });
             for (let x = -4; x < 4; x++) {
@@ -107,56 +113,65 @@
                     }
                 }
             }
-            for (let x = -4, y = 0; x < 0;) {
-                const topL = new THREE.Vector3(x * 5, y * 5, 0)
-                mouthGeometry.vertices.push(topL)
-                x++;
-                y++;
+            for (let z = 0; z < 5; z++) {
+                for (let x = -4, y = 0; x < 3;) {
+                    const topL = new THREE.Vector3(x * 3, y * 3, z)
+                    mouthGeometry.vertices.push(topL)
+                    x++;
+                    y++;
+                }
+                for (let x = 3, y = 5; x < 8;) {
+                    const topR = new THREE.Vector3(x * 3, y * 3, z)
+                    mouthGeometry.vertices.push(topR)
+                    x++;
+                    y--;
+                }
+                for (let x = -4; x < 9; x++) {
+                    const middle = new THREE.Vector3(x * 3, 0, z)
+                    mouthGeometry.vertices.push(middle)
+                }
+                for (let x = -4, y = 0; x < 3;) {
+                    const bottomL = new THREE.Vector3(x * 3, y * 3, z)
+                    mouthGeometry.vertices.push(bottomL)
+                    x++;
+                    y--;
+                }
+                for (let x = 3, y = -5; x < 8;) {
+                    const bottomR = new THREE.Vector3(x * 3, y * 3, z)
+                    mouthGeometry.vertices.push(bottomR)
+                    x++;
+                    y++;
+                }
             }
-            for (let x = 0, y = 4; x < 5;) {
-                const topR = new THREE.Vector3(x * 5, y * 5, 0)
-                mouthGeometry.vertices.push(topR)
-                x++;
-                y--;
+            for (let z = 0; z > -7; z--) {
+                for (let x = -4, y = -5; y < -1;) {
+                    const left = new THREE.Vector3(x * 3, y * 3 - (z / 2), z)
+                    footGeometry.vertices.push(left)
+                    x++;
+                    y++;
+                }
             }
-            for (let x = -4; x < 4; x++) {
-                const middle = new THREE.Vector3(x * 5, 0, 0)
-                mouthGeometry.vertices.push(middle)
+            for (let z = 0; z > -5; z--) {
+                for (let y = -4; y < 10;) {
+                    const middle = new THREE.Vector3(0 + z / 2, y * 3, z)
+                    footGeometry.vertices.push(middle)
+                    y++;
+                }
             }
-            for (let x = -4, y = 0; x < 0;) {
-                const bottomL = new THREE.Vector3(x * 5, y * 5, 0)
-                mouthGeometry.vertices.push(bottomL)
-                x++;
-                y--;
+            for (let z = 0; z > -5; z--) {
+                for (let x = 4, y = -5; y < -1;) {
+                    const right = new THREE.Vector3(x * 3, y * 3 - (z / 2), z)
+                    footGeometry.vertices.push(right)
+                    x--;
+                    y++;
+                }
             }
-            for (let x = 0, y = -4; x < 5;) {
-                const bottomR = new THREE.Vector3(x * 5, y * 5, 0)
-                mouthGeometry.vertices.push(bottomR)
-                x++;
-                y++;
-            }
-
-            for (let x = -3, y = -5; y < -2;) {
-                const left = new THREE.Vector3(x * 5, y * 5, 0)
-                footGeometry.vertices.push(left)
-                x++;
-                y++;
-            }
-            for (let y = -4; y < 5;) {
-                const middle = new THREE.Vector3(0, y * 5, 0)
-                footGeometry.vertices.push(middle)
-                y++;
-            }
-            for (let x = 3, y = -5; y < -2;) {
-                const right = new THREE.Vector3(x * 5, y * 5, 0)
-                footGeometry.vertices.push(right)
-                x--;
-                y++;
-            }// 1 2 3 4 5 4 3 2 1
-            for (let y = 0; y < 10; y++) {
-                for (let x = 0; x < 10; x++) {
-                    if (x < y) {
-                        handGeometry.vertices.push(new THREE.Vector3(x * 5, y * 5, 0))
+            for (let z = 0; z < 6; z++) {
+                for (let y = 0; y < 25; y++) {
+                    for (let x = 0; x < 25; x++) {
+                        if (x < y) {
+                            handGeometry.vertices.push(new THREE.Vector3(x * 3, y * 3, z))
+                        }
                     }
                 }
             }
@@ -172,13 +187,13 @@
             leftEyes.position.set(-50, 55, 120)
             rightEyes.position.set(50, 55, 120)
             mouth.position.set(0, -30, 120)
-            leftFoot.position.set(-40, -140, 70)
-            rightFoot.position.set(40, -140, 70)
-            leftHand.position.set(-130, -30, 70)
-            rightHand.position.set(125, 30, 70)
-            leftHand.rotation.z+=0.8;
-            rightHand.rotation.z+=4;
-            scene.add(body, leftEyes, rightEyes, mouth, leftFoot, rightFoot, leftHand,rightHand)
+            leftFoot.position.set(-40, -175, 0)
+            rightFoot.position.set(40, -175, 0)
+            leftHand.position.set(-150, -60, 0)
+            rightHand.position.set(150, 50, 0)
+            leftHand.rotation.z += 0.8;
+            rightHand.rotation.z += 3.95;
+            scene.add(body, leftEyes, rightEyes, mouth, leftFoot, rightFoot, leftHand, rightHand)
         }
 
         function init() {
