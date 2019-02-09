@@ -18,11 +18,10 @@ var S = {
   }
 };
 
-
 S.Drawing = (function () {
   var canvas,
       context,
-      renderFn
+      renderFn,
       requestFrame = window.requestAnimationFrame       ||
                      window.webkitRequestAnimationFrame ||
                      window.mozRequestAnimationFrame    ||
@@ -73,7 +72,6 @@ S.Drawing = (function () {
   }
 }());
 
-
 S.UI = (function () {
   var input = document.querySelector('.ui-input'),
       ui = document.querySelector('.ui'),
@@ -90,7 +88,7 @@ S.UI = (function () {
       firstAction = true,
       sequence = [],
       cmd = '#';
-
+console.log(input,'this is inputttttttttt');
   function formatTime(date) {
     var h = date.getHours(),
         m = date.getMinutes(),
@@ -416,7 +414,7 @@ S.Dot.prototype = {
     return false;
   },
 
-  _update: function () {
+  _update: function (d) {
     if (this._moveTowards(this.t)) {
       var p = this.q.shift();
 
@@ -438,7 +436,6 @@ S.Dot.prototype = {
         }
       }
     }
-
     d = this.p.a - this.t.a;
     this.p.a = Math.max(0.1, this.p.a - (d * 0.05));
     d = this.p.z - this.t.z;
@@ -482,7 +479,7 @@ S.ShapeBuilder = (function () {
   }
 
   function processCanvas() {
-    var pixels = shapeContext.getImageData(0, 0, shapeCanvas.width, shapeCanvas.height).data;
+    var pixels = shapeContext.getImageData(0, 0, shapeCanvas.width, shapeCanvas.height).data,
         dots = [],
         pixels,
         x = 0,
