@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import "../normalize.css";
-import "../style.css";
+import "./normalize.css";
+import "./style.css";
 
 export default class Banner extends Component {
   componentDidMount() {
