@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from "gatsby"
-
+import { Link } from "gatsby";
 import "./normalize.css";
 import "./style.css";
 
@@ -17,7 +16,7 @@ export default class Banner extends Component {
         if (i !== -1) {
           S.UI.simulate(decodeURI(action).substring(i + 3));
         } else {
-          S.UI.simulate('|歡迎光臨|官方網站|魔物培養皿');
+          S.UI.simulate('|歡迎光臨|魔物培養皿');
         }
 
         S.Drawing.loop(function () {
@@ -422,7 +421,6 @@ export default class Banner extends Component {
 
         return false;
       },
-
       _update: function () {
         if (this._moveTowards(this.t)) {
           let p = this.q.shift();
@@ -713,11 +711,14 @@ export default class Banner extends Component {
     S.init();
 
   }
+  componentWillUnmount(){
+    for( var i=0;i<100;i++ ){
+      clearInterval(i);
+    }
+  }
   render() {
     return (
       <div style={{ "position": "relative", 'height': '100vh' }}>
-              <Link to='/story'>回到故事</Link>
-
         {/* <!-- <div style="text-align:center;clear:both;position:absolute;top:0;left:260px">
           <script src="/gg_bd_ad_720x90.js" type="text/javascript"></script>
           <script src="/follow.js" type="text/javascript"></script>
@@ -731,6 +732,7 @@ export default class Banner extends Component {
           <span className="ui-return">↵</span>
         </div>
 
+        <Link to='/story 'className='link'>回到故事</Link>
         <div className="overlay">
           <div className="tabs">
             <div className="tabs-labels">

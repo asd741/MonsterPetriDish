@@ -1,7 +1,19 @@
-
+.link{
+  position: fixed;
+  left: 10%;
+  top: 75%;
+  color: yellow;
+  font-weight: 900;
+  font-size: 5vmax;
+  direction: none;
+  border: 0;
+}
+canvas{
+  display: block;
+}
 body {
   font-family: "Avenir", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  background: #79a8ae;
+  background: linear-gradient(to bottom,#cbebdb,#53a4c5);
   color: #666;
   font-size: 16px;
   line-height: 1.5em;

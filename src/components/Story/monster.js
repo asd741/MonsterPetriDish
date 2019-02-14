@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { Link } from "gatsby"
-
+import { Link } from "gatsby";
+import './monster.css';
 import * as THREE from 'three';
 import Orbitcontrols from 'three-orbitcontrols';
 export default class Monster extends Component {
@@ -218,7 +218,7 @@ export default class Monster extends Component {
       spotLight.position.set(-10, 40, 30);
       scene.add(spotLight);
 
-      document.body.appendChild(renderer.domElement);
+      document.getElementById('monster').appendChild(renderer.domElement);
     }
     function animate() {
       monster.rotation.z += 0.005;
@@ -241,11 +241,18 @@ export default class Monster extends Component {
     init();
     render();
   }
+  componentWillUnmount(){
+    window.onresize=null;
+    for( var i=0;i<100;i++ ){
+      clearInterval(i);
+    }
+  }
   render() {
     return (
       <div style={{ "position": "relative" }}>
         <div id="stats" />
-        <Link to='/'>回到首頁</Link>
+        <Link to='/' className='link'>回到首頁</Link>
+        <div id='monster'/>
       </div>
     );
   }

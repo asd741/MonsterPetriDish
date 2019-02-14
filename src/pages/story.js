@@ -1,11 +1,12 @@
 import React from "react"
 import { Link } from "gatsby"
 import Layout from "../components/layout"
-import Banner from '../components/banner'
-const IndexPage = () => (
+import Monster from '../components/story/monster'
+
+const Story = () => (
   <Layout>
-    <Banner/>
+    <Monster/>
   </Layout>
 )
 
-export default IndexPage
+export default Story

@@ -1,6 +1,7 @@
 {
   "name": "gatsby-starter-default",
   "private": true,
+  "homepage": "https://asd741.github.io/MonsterPetriDish/",
   "description": "A simple starter to get up and developing quickly with Gatsby",
   "version": "0.1.0",
   "author": "Kyle Mathews <mathews.kyle@gmail.com>",
@@ -26,6 +27,7 @@
   ],
   "license": "MIT",
   "scripts": {
+    "deploy": "gatsby build && gh-pages -d public -b master",
     "build": "gatsby build",
     "dev": "gatsby develop",
     "start": "npm run develop",
@@ -38,5 +40,8 @@
   },
   "bugs": {
     "url": "https://github.com/gatsbyjs/gatsby/issues"
+  },
+  "devDependencies": {
+    "gh-pages": "^2.0.1"
   }
 }
