@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
+import { Link } from "gatsby"
+
 import * as THREE from 'three';
 import Orbitcontrols from 'three-orbitcontrols';
 export default class Monster extends Component {
   componentDidMount() {
-
     let renderer, scene, camera;
     let cameraControl, stats, monster;
     // function initStats() {
@@ -244,6 +245,7 @@ export default class Monster extends Component {
     return (
       <div style={{ "position": "relative" }}>
         <div id="stats" />
+        <Link to='/'>回到首頁</Link>
       </div>
     );
   }

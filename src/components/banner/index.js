@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { Link } from "gatsby"
+
 import "./normalize.css";
 import "./style.css";
 
@@ -714,6 +716,8 @@ export default class Banner extends Component {
   render() {
     return (
       <div style={{ "position": "relative", 'height': '100vh' }}>
+              <Link to='/story'>回到故事</Link>
+
         {/* <!-- <div style="text-align:center;clear:both;position:absolute;top:0;left:260px">
           <script src="/gg_bd_ad_720x90.js" type="text/javascript"></script>
           <script src="/follow.js" type="text/javascript"></script>

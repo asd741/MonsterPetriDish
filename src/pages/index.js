@@ -1,11 +1,11 @@
 import React from "react"
-import { Link } from "gatsby"
 import Layout from "../components/layout"
 import Banner from '../components/banner'
+import Monster from '../components/Story/monster'
 const IndexPage = () => (
   <Layout>
     <Banner/>
-    <Link to="/monster/">Go to page 2</Link>
+    <Monster/>
   </Layout>
 )
 
